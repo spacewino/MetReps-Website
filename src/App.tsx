@@ -88,17 +88,19 @@ function ScreenshotDropzone({ id, label, aspect, caption, defaultWireframe, defa
 
   return (
     <div
-      onDragOver={(e) => { e.preventDefault(); setIsDragOver(true); }}
+      onDragOver={(e) => { if (!image) { e.preventDefault(); setIsDragOver(true); } }}
       onDragLeave={() => setIsDragOver(false)}
-      onDrop={handleDrop}
-      className={`relative border-2 ${isDragOver ? 'border-[#6366f1] bg-[#6366f1]/5' : 'border-[#1e2538] hover:border-[#6366f1]/40'} bg-[#0f1422] transition-all duration-300 rounded-none overflow-hidden cursor-pointer group`}
+      onDrop={(e) => { if (!image) handleDrop(e); }}
+      className={`relative border-2 ${isDragOver ? 'border-[#6366f1] bg-[#6366f1]/5' : 'border-[#1e2538]'} bg-[#0f1422] transition-all duration-300 rounded-none overflow-hidden ${image ? 'cursor-default' : 'cursor-pointer hover:border-[#6366f1]/40'} group`}
     >
-      <input 
-        type="file" 
-        accept="image/*" 
-        onChange={handleFileInputChange} 
-        className="absolute inset-0 opacity-0 cursor-pointer z-20"
-      />
+      {!image && (
+        <input 
+          type="file" 
+          accept="image/*" 
+          onChange={handleFileInputChange} 
+          className="absolute inset-0 opacity-0 cursor-pointer z-20"
+        />
+      )}
 
       <div className={`${aspect === 'square' ? 'aspect-square' : aspect === 'landscape' ? 'aspect-[16/9]' : 'aspect-[9/16]'} w-full relative flex flex-col items-center justify-center`}>
         {image ? (
@@ -109,18 +111,6 @@ function ScreenshotDropzone({ id, label, aspect, caption, defaultWireframe, defa
               referrerPolicy="no-referrer"
               className="w-full h-full object-contain bg-[#020617]" 
             />
-            {/* Hover clear button */}
-            <button
-              onClick={handleClear}
-              className="absolute top-3 right-3 p-2 bg-black/80 border border-[#1e2538] text-red-400 hover:text-red-300 z-30 transition-all duration-300 opacity-0 group-hover:opacity-100 rounded-none"
-              title="Remove Screenshot"
-            >
-              <Trash2 className="w-4 h-4" />
-            </button>
-            {/* Subtle active tag */}
-            <div className="absolute bottom-3 left-3 px-2 py-0.5 bg-[#34d399]/10 border border-[#34d399]/30 text-[#34d399] font-mono text-[9px] uppercase z-30 tracking-widest transition-all duration-300 opacity-0 group-hover:opacity-100">
-              [ SCREENSHOT ACTIVE ]
-            </div>
           </div>
         ) : (
           <div className="p-6 text-center space-y-4 flex flex-col items-center justify-center h-full z-0 pointer-events-none">
@@ -214,7 +204,7 @@ export default function App() {
                 {/* Real-World Action Triggers */}
                 <div className="flex flex-col sm:flex-row gap-4 pt-4">
                   <a
-                    href="https://play.google.com/store"
+                    href="https://play.google.com/store/apps/details?id=com.metreps"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-mono font-bold text-xs tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-2 group rounded-none"

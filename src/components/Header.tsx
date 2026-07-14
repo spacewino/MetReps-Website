@@ -53,7 +53,7 @@ export default function Header() {
               <div className="flex items-center gap-1.5">
                 <span className="inline-block w-1.5 h-1.5 bg-emerald-400 animate-pulse rounded-none" />
                 <span className="font-mono text-[8px] text-[#94a3b8] tracking-widest uppercase">
-                  BETA 2.4 LIVE
+                  Version 1.0 is LIVE
                 </span>
               </div>
             </div>
@@ -81,8 +81,9 @@ export default function Header() {
               <span>PLATFORM: GOOGLE PLAY STORE</span>
             </div>
             <a
-              href="#waitlist"
-              onClick={(e) => handleScrollTo(e, '#waitlist')}
+              href="https://play.google.com/store/apps/details?id=com.metreps"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-mono font-bold tracking-wider uppercase rounded-none border border-indigo-400 hover:border-indigo-300 transition-all duration-300 shadow-[0_0_15px_rgba(99,102,241,0.2)]"
             >
               GET METREPS
@@ -129,8 +130,9 @@ export default function Header() {
                   <span>PLATFORM: GOOGLE PLAY STORE</span>
                 </div>
                 <a
-                  href="#waitlist"
-                  onClick={(e) => handleScrollTo(e, '#waitlist')}
+                  href="https://play.google.com/store/apps/details?id=com.metreps"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full text-center py-2.5 text-xs font-mono font-bold tracking-wider bg-indigo-600 border border-indigo-400 text-white rounded-none hover:bg-indigo-500 transition-all"
                 >
                   GET METREPS
